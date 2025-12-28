@@ -9,6 +9,8 @@ class Program
         WriteLine("Console Calculator in C#\r"); 
         WriteLine("------------------------\n");
 
+        Calculator calculator = new Calculator();
+
         while (!endApp)
         {
             string? numInput1 = "";
@@ -51,7 +53,7 @@ class Program
             {
                 try
                 {
-                    result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                     if (double.IsNaN(result))
                     {
                         WriteLine("This operation will result in a mathematical error.\n");
