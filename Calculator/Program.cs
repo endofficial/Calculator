@@ -76,6 +76,7 @@ class Program
                 endApp = true;
             }
         }
+        calculator.Finish();
         return;
     }
 }
