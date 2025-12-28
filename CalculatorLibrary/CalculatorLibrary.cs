@@ -10,7 +10,6 @@ namespace CalculatorLibrary
             Trace.Listeners.Add(new TextWriterTraceListener(logFile)); // ottieni la raccolta di listener che esegue il monitoraggio dell'output di traccia
             Trace.AutoFlush = true; // indica se chiamare il metodo flush() sulla proprietà listeners dopo ogni operazione di scrittura
             Trace.WriteLine("Starting Calculator Log");
-
             Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));
             Trace.WriteLine("Started {0}", System.DateTime.Now.ToString());
         }
@@ -23,17 +22,21 @@ namespace CalculatorLibrary
             {
                 case "a":
                     result = num1 + num2;
+                    Trace.WriteLine(String.Format("{0} + {1} = {2}", num1, num2, result));
                     break;
                 case "s":
                     result = num1 - num2;
+                    Trace.WriteLine(String.Format("{0} - {1} = {2}", num1, num2, result));
                     break;
                 case "m":
                     result = num1 * num2;
+                    Trace.WriteLine(String.Format("{0} * {1} = {2}", num1, num2, result));
                     break;
                 case "d":
                     if (num2 != 0)
                     {
                         result = num1 / num2;
+                        Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                     }
                     break;
                 default:
