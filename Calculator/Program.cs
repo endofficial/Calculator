@@ -10,9 +10,14 @@ class Program
         WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
+        
+        int nCalc = 0; // nCalc will count the number of calculations performed
 
         while (!endApp)
         {
+            nCalc++;
+            WriteLine($"\nCalculation #{nCalc}\n");
+
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
