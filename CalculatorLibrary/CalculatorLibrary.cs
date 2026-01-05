@@ -25,7 +25,7 @@ namespace CalculatorLibrary
             Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));*/
         }
 
-        public string LogHistoryViewed()
+        public void LogHistoryViewed()
         {
             writer.WriteStartObject();
             writer.WritePropertyName("Event");
@@ -35,7 +35,7 @@ namespace CalculatorLibrary
             writer.WriteEndObject();
         }
 
-        public string LogHistoryCleared()
+        public void LogHistoryCleared()
         {
             writer.WriteStartObject();
             writer.WritePropertyName("Event");

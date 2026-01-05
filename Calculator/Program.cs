@@ -31,6 +31,7 @@ class Program
 
                 if (input is "O") 
                 {
+                    calculator.LogHistoryViewed();
                     WriteLine("\n--- Chronology of Calculations ---\n");
                     foreach (string record in RegToCalculations.registerCalc)
                     {
@@ -49,6 +50,7 @@ class Program
                     }
                     if (deleteInput is "K")
                     {
+                        calculator.LogHistoryCleared();
                         RegToCalculations.registerCalc.Clear();
                         WriteLine("Chronology cleared.\n");
                     }
@@ -90,13 +92,13 @@ class Program
             WriteLine("\td - Divide");
             WriteLine("Your option? ");
 
-            op = (ReadLine() ?? "").ToUpper();
+            string? op = ReadLine();
             while (op is null || !Regex.IsMatch(op, "[a|s|m|d]")) 
             {
                 WriteLine("Invalid option. Please select a valid operator.");
-                op = (ReadLine() ?? "").ToUpper();
+                op = ReadLine();
             }
-            else
+            if (op is not null)
             {
                 try
                 {
