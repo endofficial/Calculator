@@ -15,12 +15,16 @@ class Program
 
         while (!endApp)
         {
+            string? numInput1 = "";
+            string? numInput2 = "";
+            double result = 0;
+
             nCalc++;
-            WriteLine($"\nCalculation #{nCalc}\n");
+            WriteLine($"Calculation #{nCalc}\n");
 
             if (nCalc > 1) // After the first calculation, to show chronology
             {
-                Write("\nIf you see chronology calculations enter 'O', enter 'C' to continue, enter 'E' to exit program: ");
+                Write("If you see chronology calculations enter 'O', enter 'C' to continue, enter 'E' to exit program: ");
                 string? input = (ReadLine() ?? "").ToUpper();
 
                 while (input is null || !Regex.IsMatch(input, "[O|C|E]"))
@@ -31,11 +35,13 @@ class Program
 
                 if (input is "O") 
                 {
-                    calculator.LogHistoryViewed();
+                    calculator.LogHistoryViewed(); // To log that history was viewed
+
                     WriteLine("\n--- Chronology of Calculations ---\n");
-                    foreach (string record in RegToCalculations.registerCalc)
+
+                    for (int i = 0; i < RegToCalculations.registerCalc.Count; i++)
                     {
-                        WriteLine($"{record}\n");
+                        WriteLine($"[{i}] {RegToCalculations.registerCalc[i]}\n");
                     }
                     WriteLine("--- End of Chronology ---\n");
 
@@ -45,15 +51,40 @@ class Program
 
                     while (deleteInput is null || !Regex.IsMatch(deleteInput, "[K|C]"))
                     {
-                        WriteLine("Invalid option. Please selecet a valid option.\n");
+                        WriteLine("\nInvalid option. Please selecet a valid option.\n");
                         deleteInput = (ReadLine() ?? "").ToUpper();
                     }
                     if (deleteInput is "K")
                     {
-                        calculator.LogHistoryCleared();
+                        calculator.LogHistoryCleared(); // To log that history was cleared
+
                         RegToCalculations.registerCalc.Clear();
+                        RegToCalculations.registerResult.Clear();
                         WriteLine("Chronology cleared.\n");
                     }
+
+                    else if (deleteInput is "C")
+                    {
+                        Write("\nIf you want to use a calculation of the chronology, press and enter a number or press 'C' to continue: ");
+                        string? input2 = (ReadLine() ?? "").ToUpper();
+
+                        while (input2 is null || input2 != "C" && !int.TryParse(input2, out _))
+                        {
+                            Write("\nInvalid option. Please select a valid option: ");
+                            input2 = (ReadLine() ?? "").ToUpper();
+                        }
+
+                        if (int.TryParse(input2, out int reuseInput))
+                        {
+                            if (reuseInput >= 0 && reuseInput < RegToCalculations.registerResult.Count)
+                            {
+                                string reuseCalc = RegToCalculations.registerResult[reuseInput];
+                                WriteLine($"\nReusing calculation: {reuseCalc}\n");
+                                numInput1 = reuseCalc;
+                            }
+                        }
+                    }
+
                 }
                 else if (input is "E")
                 {
@@ -61,12 +92,11 @@ class Program
                 }
             }
 
-            string? numInput1 = "";
-            string? numInput2 = "";
-            double result = 0;
-
-            Write("Type a number, and then press Enter: ");
-            numInput1 = ReadLine();
+            if (string.IsNullOrEmpty(numInput1))
+            {
+                Write("Type a number, and then press Enter: ");
+                numInput1 = ReadLine();
+            }
 
             Write("Type another number, and then press Enter: ");
             numInput2 = ReadLine();
@@ -85,12 +115,12 @@ class Program
                 numInput2 = ReadLine();
             }
 
-            WriteLine("Choose an operator from the following list:");
+            WriteLine("Choose an operator from the following list:\n");
             WriteLine("\ta - Add");
             WriteLine("\ts - Subtract");
             WriteLine("\tm - Multiply");
             WriteLine("\td - Divide");
-            WriteLine("Your option? ");
+            WriteLine("\nYour option? ");
 
             string? op = ReadLine();
             while (op is null || !Regex.IsMatch(op, "[a|s|m|d]")) 
