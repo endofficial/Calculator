@@ -30,7 +30,7 @@ public class RegToCalculations
                 break;
         }
 
-        string calcDetails = $"{n1} {Operator} {n2} = {result}";
+        string calcDetails = $"{n1} {Operator} {n2} = {result:F2}";
         registerCalc.Add(calcDetails);
 
         return result;

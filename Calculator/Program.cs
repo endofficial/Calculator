@@ -18,14 +18,15 @@ class Program
             nCalc++;
             WriteLine($"\nCalculation #{nCalc}\n");
 
-            if (nCalc > 1)
+            if (nCalc > 1) // After the first calculation, to show chronology
             {
-                Write("\nIf you see chronology calculations, enter 'O' otherwise enter 'C' to continue or enter 'E' to exit: ");
-                string input = ReadLine().ToUpper();
+                Write("\nIf you see chronology calculations enter 'O', enter 'C' to continue, enter 'E' to exit program: ");
+                string? input = (ReadLine() ?? "").ToUpper();
 
-                if (input is null || !Regex.IsMatch(input, "[O|C|E]"))
+                while (input is null || !Regex.IsMatch(input, "[O|C|E]"))
                 {
-                    WriteLine("Invalid option. Please select a valid option.\n");
+                    Write("Invalid option. Please select a valid option: ");
+                    input = (ReadLine() ?? "").ToUpper();
                 }
 
                 if (input is "O") 
@@ -36,6 +37,21 @@ class Program
                         WriteLine($"{record}\n");
                     }
                     WriteLine("--- End of Chronology ---\n");
+
+                    // to clear the chronology
+                    Write("If you want to remove the cronology, enter 'K' or press 'C' to continue: \n");
+                    string? deleteInput = (ReadLine() ?? "").ToUpper();
+
+                    while (deleteInput is null || !Regex.IsMatch(deleteInput, "[K|C]"))
+                    {
+                        WriteLine("Invalid option. Please selecet a valid option.\n");
+                        deleteInput = (ReadLine() ?? "").ToUpper();
+                    }
+                    if (deleteInput is "K")
+                    {
+                        RegToCalculations.registerCalc.Clear();
+                        WriteLine("Chronology cleared.\n");
+                    }
                 }
                 else if (input is "E")
                 {
