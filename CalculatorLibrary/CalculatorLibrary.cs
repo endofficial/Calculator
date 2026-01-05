@@ -7,6 +7,7 @@ namespace CalculatorLibrary
     {
         RegToCalculations chronology = new RegToCalculations();
         JsonWriter writer;
+
         public Calculator()
         {
             StreamWriter logFile = File.CreateText("calculatorlog.json");
@@ -22,8 +23,27 @@ namespace CalculatorLibrary
             Trace.AutoFlush = true; // indica se chiamare il metodo flush() sulla proprietà listeners dopo ogni operazione di scrittura
             Trace.WriteLine("Starting Calculator Log");
             Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));*/
-        } 
+        }
 
+        public string LogHistoryViewed()
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("Event");
+            writer.WriteValue("Chronology Viewed");
+            writer.WritePropertyName("Time");
+            writer.WriteValue(DateTime.Now.ToString());
+            writer.WriteEndObject();
+        }
+
+        public string LogHistoryCleared()
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("Event");
+            writer.WriteValue("Chronology Cleared");
+            writer.WritePropertyName("Time");
+            writer.WriteValue(DateTime.Now.ToString());
+            writer.WriteEndObject();
+        }
 
         public double DoOperation(double num1, double num2, string op)
         {

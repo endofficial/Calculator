@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using CalculatorLibrary;
+using Newtonsoft.Json;
 
 public class RegToCalculations
 {
