@@ -20,14 +20,26 @@ class Program
 
             if (nCalc > 1)
             {
-                Write("\nIf you see chronology calculations, enter 'O': ");
-                if (ReadLine()?.ToUpper() is "O")
+                Write("\nIf you see chronology calculations, enter 'O' otherwise enter 'C' to continue or enter 'E' to exit: ");
+                string input = ReadLine().ToUpper();
+
+                if (input is null || !Regex.IsMatch(input, "[O|C|E]"))
+                {
+                    WriteLine("Invalid option. Please select a valid option.\n");
+                }
+
+                if (input is "O") 
                 {
                     WriteLine("\n--- Chronology of Calculations ---\n");
                     foreach (string record in RegToCalculations.registerCalc)
                     {
                         WriteLine($"{record}\n");
                     }
+                    WriteLine("--- End of Chronology ---\n");
+                }
+                else if (input is "E")
+                {
+                    break;
                 }
             }
 
@@ -63,7 +75,7 @@ class Program
             WriteLine("Your option? ");
 
             string? op = ReadLine();
-            if (op is null || !Regex.IsMatch(op, "[a|s|m|d]"))
+            if (op is null || !Regex.IsMatch(op, "[a|s|m|d]")) 
             {
                 WriteLine("Invalid option. Please select a valid operator.");
             }
