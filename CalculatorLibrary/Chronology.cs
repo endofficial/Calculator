@@ -4,36 +4,35 @@ using Newtonsoft.Json;
 
 public class RegToCalculations
 {
-    public static List<string> registerCalc = new List<string>();
+    public static List<string> registerCalc = new List<string>(); // To register the calculations
+    public static List<string> registerResult = new List<string>(); // To register the results
 
     public double RegOperations(double n1, double n2, string op, double result)
     {
-        double number1 = n1;
-        double number2 = n2;
-        string Operator = op;
-        double Result = result;
-
         switch (op)
         {
             case "a":
-                Operator = "+";
+                op = "+";
                 break;
             case "s":
-                Operator = "-";
+                op = "-";
                 break;
             case "m":
-                Operator = "*";
+                op = "*";
                 break;
             case "d":
-                Operator = "/";
+                op = "/";
                 break;
             default:
-                Operator = "?";
+                op = "?";
                 break;
         }
 
-        string calcDetails = $"{n1} {Operator} {n2} = {result:F2}";
+        string calcDetails = $"{n1} {op} {n2} = {result.ToString("0.##")}";
         registerCalc.Add(calcDetails);
+
+        string resultDetails = $"{result.ToString("0.##")}";
+        registerResult.Add(resultDetails);
 
         return result;
     }
