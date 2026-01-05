@@ -90,10 +90,11 @@ class Program
             WriteLine("\td - Divide");
             WriteLine("Your option? ");
 
-            string? op = ReadLine();
-            if (op is null || !Regex.IsMatch(op, "[a|s|m|d]")) 
+            op = (ReadLine() ?? "").ToUpper();
+            while (op is null || !Regex.IsMatch(op, "[a|s|m|d]")) 
             {
                 WriteLine("Invalid option. Please select a valid operator.");
+                op = (ReadLine() ?? "").ToUpper();
             }
             else
             {
