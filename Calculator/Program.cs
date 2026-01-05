@@ -10,13 +10,26 @@ class Program
         WriteLine("------------------------\n");
 
         Calculator calculator = new Calculator();
-        
+
         int nCalc = 0; // nCalc will count the number of calculations performed
 
         while (!endApp)
         {
             nCalc++;
             WriteLine($"\nCalculation #{nCalc}\n");
+
+            if (nCalc > 1)
+            {
+                Write("\nIf you see chronology calculations, enter 'O': ");
+                if (ReadLine()?.ToUpper() is "O")
+                {
+                    WriteLine("\n--- Chronology of Calculations ---\n");
+                    foreach (string record in RegToCalculations.registerCalc)
+                    {
+                        WriteLine($"{record}\n");
+                    }
+                }
+            }
 
             string? numInput1 = "";
             string? numInput2 = "";
