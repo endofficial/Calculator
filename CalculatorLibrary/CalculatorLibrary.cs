@@ -5,6 +5,7 @@ namespace CalculatorLibrary
 {
     public class Calculator
     {
+        RegToCalculations chronology = new RegToCalculations();
         JsonWriter writer;
         public Calculator()
         {
@@ -21,7 +22,8 @@ namespace CalculatorLibrary
             Trace.AutoFlush = true; // indica se chiamare il metodo flush() sulla proprietà listeners dopo ogni operazione di scrittura
             Trace.WriteLine("Starting Calculator Log");
             Trace.WriteLine(String.Format("Started {0}", System.DateTime.Now.ToString()));*/
-        }
+        } 
+
 
         public double DoOperation(double num1, double num2, string op)
         {
@@ -32,6 +34,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operand2");
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
+
 
             switch (op)
             {
@@ -64,6 +67,8 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Result");
             writer.WriteValue(result);
             writer.WriteEndObject();
+
+            chronology.RegOperations(num1, num2, op, result);
 
             return result;
         }
