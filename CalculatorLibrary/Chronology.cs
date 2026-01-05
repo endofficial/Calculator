@@ -1,4 +1,6 @@
-﻿public class RegToCalculations
+﻿using System.Diagnostics;
+
+public class RegToCalculations
 {
     public static List<string> registerCalc = new List<string>();
 
@@ -6,10 +8,29 @@
     {
         double number1 = n1;
         double number2 = n2;
-        string Operation = op;
+        string Operator = op;
         double Result = result;
 
-        string calcDetails = $"{n1} {op} {n2} = {result}";
+        switch (op)
+        {
+            case "a":
+                Operator = "+";
+                break;
+            case "s":
+                Operator = "-";
+                break;
+            case "m":
+                Operator = "*";
+                break;
+            case "d":
+                Operator = "/";
+                break;
+            default:
+                Operator = "?";
+                break;
+        }
+
+        string calcDetails = $"{n1} {Operator} {n2} = {result}";
         registerCalc.Add(calcDetails);
 
         return result;
