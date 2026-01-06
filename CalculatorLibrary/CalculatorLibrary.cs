@@ -55,6 +55,7 @@ namespace CalculatorLibrary
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
 
+            double rad = num1 * (Math.PI / 180.0);
 
             switch (op)
             {
@@ -80,6 +81,35 @@ namespace CalculatorLibrary
                         writer.WriteValue("Divide");
                         //Trace.WriteLine(String.Format("{0} / {1} = {2}", num1, num2, result));
                     }
+                    break;
+                case "r":
+                    result = Math.Sqrt(num1);
+                    writer.WriteValue("Square Root");
+                    break;
+                case "p":
+                    result = Math.Pow(num1, num2);
+                    writer.WriteValue("Raising");
+                    break;
+                case "sn":
+                    // Convert degrees to radians
+                    result = Math.Sin(rad); 
+                    writer.WriteValue("Sine");
+                    break;
+                case "cs":
+                    result = Math.Cos(rad);
+                    writer.WriteValue("Cosine");
+                    break;
+                case "tn":
+                    if (Math.Abs(Math.Cos(rad)) < 0.0001) // Math.Abs because of floating point precision issues
+                    {
+                        WriteLine("UNDEFINED VALUE\n");
+                        result = double.NaN;
+                    }
+                    else
+                    {
+                        result = Math.Tan(rad);
+                    }
+                    writer.WriteValue("Tangent");
                     break;
                 default:
                     break;

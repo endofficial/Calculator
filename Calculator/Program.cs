@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CalculatorLibrary;
 
+
 class Program
 {
     static void Main(string[] args)
@@ -92,6 +93,7 @@ class Program
                 }
             }
 
+            // check numInput1 value because it could be assigned from chronology reuse
             if (string.IsNullOrEmpty(numInput1))
             {
                 Write("Type a number, and then press Enter: ");
@@ -115,15 +117,22 @@ class Program
                 numInput2 = ReadLine();
             }
 
+            OutputEncoding = System.Text.Encoding.UTF8;
+
             WriteLine("Choose an operator from the following list:\n");
             WriteLine("\ta - Add");
             WriteLine("\ts - Subtract");
             WriteLine("\tm - Multiply");
             WriteLine("\td - Divide");
+            WriteLine("\tr - Square root");
+            WriteLine("\tp - Raising");
+            WriteLine("\tsn - Sine");
+            WriteLine("\tcs - Cosine");
+            WriteLine("\ttn - Tangent");
             WriteLine("\nYour option? ");
 
             string? op = ReadLine();
-            while (op is null || !Regex.IsMatch(op, "[a|s|m|d]")) 
+            while (op is null || !Regex.IsMatch(op, "[a|s|m|d|r|p|sn|cs|tn]")) 
             {
                 WriteLine("Invalid option. Please select a valid operator.");
                 op = ReadLine();
