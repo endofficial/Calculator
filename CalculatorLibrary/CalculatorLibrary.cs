@@ -13,8 +13,8 @@ namespace CalculatorLibrary
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
-            writer.Formatting = Formatting.Indented; // indica come deve essere formattato l'output di testo JSON
-            writer.WriteStartObject(); // scrive l'inzio di un oggetto JSON
+            writer.Formatting = Formatting.Indented; // identied formatting for better readability
+            writer.WriteStartObject(); 
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
 
